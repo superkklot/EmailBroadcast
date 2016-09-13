@@ -44,6 +44,8 @@ namespace EmailBroadcast.From
                     rets.Add(ret);
                 }
             }
+            sr.Close();
+            fileStream.Close();
             return rets;
         }
     }

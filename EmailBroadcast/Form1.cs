@@ -1,4 +1,5 @@
-﻿using EmailBroadcast.From;
+﻿using EmailBroadcast.Body;
+using EmailBroadcast.From;
 using EmailBroadcast.To;
 using System;
 using System.Collections.Generic;
@@ -16,17 +17,68 @@ namespace EmailBroadcast
 {
     public partial class Form1 : Form
     {
+        private ToAddressService _toService;
+        private ClientInfoService _fromService;
+        private int _unitToAddress;
+        private Content _content;
+
         public Form1()
         {
             InitializeComponent();
+            _toService = new ToAddressService();
+            _fromService = new ClientInfoService();
+            _unitToAddress = ConfigHelper.GetUnitToAddressNumber();
+            _content = new Content();
         }
 
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            webContent.Url = new Uri(_content.FullPath);
+        }
         private void btnSend_Click(object sender, EventArgs e)
         {
-            ToAddressService toService = new ToAddressService();
-            var ll = toService.GetToAddresses();
-            ClientInfoService clientService = new ClientInfoService();
-            var cc = clientService.GetClientInfo();
+            MessageBox.Show(_unitToAddress.ToString());
+            var toAddressList = _toService.GetToAddresses();
+            if(toAddressList == null || toAddressList.Count == 0)
+            {
+                MessageBox.Show("接收地址为空");
+                return;
+            }
+            var fromAddressList = _fromService.GetClientInfo();
+            if(fromAddressList == null || fromAddressList.Count == 0)
+            {
+                MessageBox.Show("发送服务地址为空");
+                return;
+            }
+            int page = (int)Math.Ceiling((double)toAddressList.Count / _unitToAddress);
+            for(int i = 0; i < page; i++)
+            {
+                var index = i % fromAddressList.Count;
+                var fromAddress = fromAddressList[index];
+                var toAddresses = toAddressList.Skip(i * _unitToAddress).Take(_unitToAddress).ToList();
+                SendEmail(fromAddress, toAddresses);
+            }
+            MessageBox.Show("发送成功，请查看日志");
+        }
+
+        private void SendEmail(ClientInfo fromAddress, List<string> toAddresses)
+        {
+            using (var log = new Log())
+            {
+                try
+                {
+
+                }
+                catch (Exception ex)
+                {
+                    log.Info(string.Format("发送失败-{0}", ex.ToString()));
+                }
+            }
+        }
+
+
+        private void btnTest_Click(object sender, EventArgs e)
+        {
             try
             {
                 //SmtpClient client = new SmtpClient();
@@ -52,10 +104,11 @@ namespace EmailBroadcast
                 //msg.Body = "abcdefg";
                 //client.Send(msg);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
 
             }
         }
+
     }
 }
