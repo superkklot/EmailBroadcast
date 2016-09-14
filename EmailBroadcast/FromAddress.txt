@@ -1,3 +1,5 @@
-//Host	UserName	Password	FromAddress	EnableSsl
-smtp.mail.yahoo.com	marytrading001	Superkklot1	marytrading001@yahoo.com	true
-smtp.163.com	mjb-709	super709	mjb-709@163.com	false
+//Host	UserName	Password	FromAddress	EnableSsl	MaxTos
+//Tab¼ü·Ö¸ô
+smtp.mail.yahoo.com	marytrading001	Superkklot1	marytrading001@yahoo.com	true	2
+smtp.163.com	mjb-709	super709	mjb-709@163.com	false	2
+smtp.live.com	marytrading001@hotmail.com	Superkklot1	marytrading001@hotmail.com	true	2

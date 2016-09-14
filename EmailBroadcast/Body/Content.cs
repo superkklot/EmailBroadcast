@@ -11,16 +11,16 @@ namespace EmailBroadcast.Body
     {
         private const string _fileName = "Body.html";
         private string _fullPath = "";
-        private string _content = "";
+        private string _body = "";
 
         public Content()
         {
             _fullPath = System.AppDomain.CurrentDomain.BaseDirectory + _fileName;
-            _content = Load();
+            _body = Load();
         }
 
         public string FullPath { get { return _fullPath; } }
-        public string Content { get { return _content; } }
+        public string Body { get { return _body; } }
 
         private string Load()
         {

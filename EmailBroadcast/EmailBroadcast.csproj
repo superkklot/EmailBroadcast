@@ -73,6 +73,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Body\Content.cs" />
     <Compile Include="ConfigHelper.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
@@ -82,6 +83,7 @@
     </Compile>
     <Compile Include="From\ClientInfo.cs" />
     <Compile Include="From\ClientInfoService.cs" />
+    <Compile Include="Log.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="To\ToAddressService.cs" />
@@ -97,7 +99,6 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <None Include="EmailBroadcast_TemporaryKey.pfx" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

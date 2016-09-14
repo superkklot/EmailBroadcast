@@ -33,7 +33,7 @@ namespace EmailBroadcast.From
                     continue;
 
                 var strList = tmpStr.Split('\t');
-                if (strList.Length >= 5)
+                if (strList.Length >= 6)
                 {
                     ClientInfo ret = new ClientInfo();
                     ret.Host = strList[0];
@@ -41,6 +41,7 @@ namespace EmailBroadcast.From
                     ret.Password = strList[2];
                     ret.FromAddress = strList[3];
                     ret.EnableSsl = strList[4] == "true";
+                    ret.MaxTos = int.Parse(strList[5]);
                     rets.Add(ret);
                 }
             }

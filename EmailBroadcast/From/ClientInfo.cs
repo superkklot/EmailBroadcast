@@ -13,5 +13,6 @@ namespace EmailBroadcast.From
         public string Password { get; set; }
         public string FromAddress { get; set; }
         public bool EnableSsl { get; set; }
+        public int MaxTos { get; set; }
     }
 }

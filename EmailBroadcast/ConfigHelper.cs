@@ -10,6 +10,7 @@ namespace EmailBroadcast
     public static class ConfigHelper
     {
         private const int _defaultUnitToAddressNumber = 20;
+        private const int _defaultWaitSeconds = 30;
         public static int GetUnitToAddressNumber()
         {
             var unitToAddress = ConfigurationManager.AppSettings.Get("UnitToAddressNumber");
@@ -18,6 +19,16 @@ namespace EmailBroadcast
             int intUnitToAddress = _defaultUnitToAddressNumber;
             int.TryParse(unitToAddress, out intUnitToAddress);
             return intUnitToAddress;
+        }
+
+        public static int GetWaitSeconds()
+        {
+            var waitSeconds = ConfigurationManager.AppSettings.Get("WaitSeconds");
+            if (waitSeconds == null)
+                return _defaultWaitSeconds;
+            int intwaitSeconds = _defaultWaitSeconds;
+            int.TryParse(waitSeconds, out intwaitSeconds);
+            return intwaitSeconds;
         }
     }
 }

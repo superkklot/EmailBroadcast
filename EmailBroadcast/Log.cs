@@ -16,8 +16,10 @@ namespace EmailBroadcast
         public Log()
         {
             _fullPath = System.AppDomain.CurrentDomain.BaseDirectory + _fileName;
-            _stream = File.Open(_fullPath, FileMode.OpenOrCreate, FileAccess.Read);
+            _stream = File.Open(_fullPath, FileMode.OpenOrCreate, FileAccess.ReadWrite);
+            _stream.Seek(0, SeekOrigin.End);
             _streamWriter = new StreamWriter(_stream);
+            _streamWriter.WriteLine();
         }
 
         public void Info(string msg)
